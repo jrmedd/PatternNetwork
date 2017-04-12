@@ -14,7 +14,7 @@ my_address = "/user/" + my_user
 #set the IP of the 'brain' computer, which will receive all patterns and create music
 brain_ip = raw_input("...and what is the brain's IP?\n")
 #set url for DB logging
-brain_url = 'http://%s:5000/' % (brain_ip)
+brain_url = 'http://%s:5000' % (brain_ip)
 #attempt OSC connection
 try:
     client.connect((brain_ip, my_port))
@@ -23,10 +23,14 @@ except:
     print "Failed to connect via UDP"
 
 try:
-    db_check = requests.get(brain_url + "db_check")
+    db_check = requests.get(brain_url + "/db_check")
     logging = db_check.json().get('logging')
 except:
     logging = False
+
+if logging:
+    print "Logging appears to be active"
+
 print "Now awaiting cards!"
 while True:
     card = pc.readline()
@@ -38,5 +42,8 @@ while True:
             oscmsg.append(pattern)
             client.send(oscmsg)
             print "Sending "  + pattern
+            if logging:
+                log = requests.get('%s/log/%s/%s' % (brain_url, my_user, pattern))
+                print log.content
     else:
         continue
