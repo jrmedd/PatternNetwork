@@ -2,15 +2,16 @@ import serial
 import OSC
 import requests
 #the serial connection (default /dev/ttyACM0 on Pi)
-pc = serial.Serial('/dev/ttyACM0', 115200)
+#pc = serial.Serial('/dev/ttyACM0', 115200)
+pc = serial.Serial('/dev/tty.usbmodem1421', 115200)
 #OSC client object
 client = OSC.OSCClient()
-#set a UDP port to send OSC messages
-my_port = int(raw_input("What UDP port shall I connect with?\n"))
 #set a user ID (0-8) so we know what instrument to control
 my_user = raw_input("What shall my user number be?\n")
 #create an OSC address based on that
 my_address = "/user/" + my_user
+#set a UDP port to send OSC messages
+my_port = 8000 + int(my_user)
 #set the IP of the 'brain' computer, which will receive all patterns and create music
 brain_ip = raw_input("...and what is the brain's IP?\n")
 #set url for DB logging
@@ -30,8 +31,11 @@ except:
 
 if logging:
     print "Logging appears to be active"
+else:
+    print "Logging doesn't appear to be active"
 
 print "Now awaiting cards!"
+
 while True:
     card = pc.readline()
     if len(card) == 37:

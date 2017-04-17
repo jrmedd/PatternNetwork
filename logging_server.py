@@ -1,7 +1,9 @@
 from flask import Flask, flash, url_for, render_template, request, redirect, make_response, Response, jsonify
 from pymongo import MongoClient
 import datetime
-logging = True
+import socket
+
+logging = False
 
 client = MongoClient('mongodb://127.0.0.1:27017')
 db = client['pattern_network']
@@ -11,8 +13,13 @@ app = Flask(__name__)
 
 app.secret_key = "L\x97\xb9^\xa4\x18\x91\xd5\xb4\xae\x87\x92&\xf32\xdf\xbfC\xf7S~\xdb)g"
 
+@app.route('/')
+def index():
+    ip = socket.gethostbyname(socket.getfqdn())
+    return render_template('index.html', ip=ip)
+
 @app.route('/log/<user_id>/<pattern>')
-def payment(user_id,pattern):
+def log_pattern(user_id,pattern):
     details = {'timestamp':datetime.datetime.now()}
     details.update({'user_id':user_id})
     details.update({'pattern':pattern})
