@@ -18,12 +18,14 @@ brain_ip = raw_input("...and what is the brain's IP?\n")
 brain_url = 'http://%s:5000' % (brain_ip)
 #attempt OSC connection
 try:
+    print "Attempting UDP connection..."
     client.connect((brain_ip, my_port))
     print "Okay, I've connected via UDP to %s, using port %d, and I'm user %s" % (brain_ip, my_port, my_user)
 except:
     print "Failed to connect via UDP"
 
 try:
+    print "Cechking to see if we're logging the performance..."
     db_check = requests.get(brain_url + "/db_check")
     logging = db_check.json().get('logging')
 except:

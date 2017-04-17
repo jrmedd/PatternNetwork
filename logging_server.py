@@ -3,7 +3,7 @@ from pymongo import MongoClient
 import datetime
 import socket
 
-logging = False
+logging = True
 
 client = MongoClient('mongodb://127.0.0.1:27017')
 db = client['pattern_network']
@@ -21,7 +21,7 @@ def index():
 @app.route('/log/<user_id>/<pattern>')
 def log_pattern(user_id,pattern):
     details = {'timestamp':datetime.datetime.now()}
-    details.update({'user_id':user_id})
+    details.update({'user_id':int(user_id)})
     details.update({'pattern':pattern})
     patterns.insert_one(details)
     print details
