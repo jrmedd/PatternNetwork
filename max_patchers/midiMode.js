@@ -9,5 +9,6 @@ function midiMode(note, mode, octave) {
   for (var i = 0; i < 7; i ++) {
     output[1+i] = output[i] + intervals[(mode+i)%7];
   }
-  return output;
+  //return output;
+  outlet(0, output);
 }
