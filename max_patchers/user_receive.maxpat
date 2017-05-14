@@ -30,6 +30,17 @@
 		"boxes" : [ 			{
 				"box" : 				{
 					"comment" : "",
+					"id" : "obj-4",
+					"maxclass" : "outlet",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 840.0, 405.0, 25.0, 25.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"comment" : "",
 					"id" : "obj-5",
 					"maxclass" : "outlet",
 					"numinlets" : 1,
@@ -297,6 +308,15 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-4", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-2", 1 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-8", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
@@ -461,20 +481,20 @@
 		"dependency_cache" : [ 			{
 				"name" : "patterncraft.maxpat",
 				"bootpath" : "/Users/jrmedd/Dropbox/PatternBeats/patterncraft_abstraction",
-				"patcherrelativepath" : "../PatternBeats/patterncraft_abstraction",
+				"patcherrelativepath" : "../../PatternBeats/patterncraft_abstraction",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "patternCraft.js",
 				"bootpath" : "/Users/jrmedd/Dropbox/PatternBeats/patterncraft_abstraction",
-				"patcherrelativepath" : "../PatternBeats/patterncraft_abstraction",
+				"patcherrelativepath" : "../../PatternBeats/patterncraft_abstraction",
 				"type" : "TEXT",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "rowNo.maxpat",
-				"bootpath" : "/Users/jrmedd/Dropbox/PatternNetwork",
+				"bootpath" : "/Users/jrmedd/Dropbox/PatternNetwork/max_patchers",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
 				"implicit" : 1
