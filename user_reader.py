@@ -9,7 +9,8 @@ client = OSC.OSCClient()
 #set a user ID (0-8) so we know what instrument to control
 my_user = raw_input("What shall my user number be?\n")
 #create an OSC address based on that
-my_address = "/user/" + my_user
+my_address = "/user/%s" % (my_user)
+connect_confirm = "/connect/%s" % (my_user)
 #set a UDP port to send OSC messages
 my_port = 8000 + int(my_user)
 #set the IP of the 'brain' computer, which will receive all patterns and create music
@@ -20,6 +21,10 @@ brain_url = 'http://%s:5000' % (brain_ip)
 try:
     print "Attempting UDP connection..."
     client.connect((brain_ip, my_port))
+    oscmsg = OSC.OSCMessage()
+    oscmsg.setAddress(connect_confirm)
+    oscmsg.append(1)
+    client.send(oscmsg)
     print "Okay, I've connected via UDP to %s, using port %d, and I'm user %s" % (brain_ip, my_port, my_user)
 except:
     print "Failed to connect via UDP"

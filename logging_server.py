@@ -31,13 +31,5 @@ def log_pattern(user_id,pattern):
 def db_check():
     return jsonify(logging=logging)
 
-@app.route('/recent')
-def recent():
-    recent = list(patterns.find({'timestamp':{'$gt':datetime.datetime.now() - datetime.timedelta(seconds=3)}},{'_id':0}))
-    if len(recent) > 0:
-        return jsonify(result=recent[0])
-    else:
-        return jsonify(result=None)
-
 if __name__ == '__main__':
 	app.run(host="0.0.0.0",debug=True)
